@@ -1,0 +1,14 @@
+### Python template
+
+*.env
+*.pyc
+#*.log
+.idea/
+*.DS_Store
+
+app_frontend/static/uploads/*
+!app_frontend/static/uploads/index.html
+
+# 数据
+static/picture/*
+
