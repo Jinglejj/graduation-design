@@ -1,5 +1,6 @@
 import os
 from flask import Flask, session, redirect, url_for, render_template, request
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from services.search import search_images
 import numpy as np
@@ -10,6 +11,7 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 
 
 def allowed_file(filename):
