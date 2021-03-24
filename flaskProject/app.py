@@ -1,10 +1,9 @@
 import os
-from flask import Flask, session, redirect, url_for, render_template, request
+from flask import Flask,jsonify, session, redirect, url_for, render_template, request
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from services.search import search_images
 import numpy as np
-
 UPLOAD_FOLDER = '/path/to/the/uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -32,7 +31,7 @@ def up_pic():
     file.save(upload_path)
     images = search_images(upload_path)
     images = np.array([s.decode('UTF-8') for s in images])
-    return images.__str__()
+    return jsonify(images.tolist())
 
 
 if __name__ == '__main__':
