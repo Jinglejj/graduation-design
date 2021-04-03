@@ -1,32 +1,18 @@
-<template>
+<template >
   <el-main>
-    <el-input placeholder="请输入内容" v-model="input" class="search-input">
-      <template slot="prepend">
-        <el-upload
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :file-list="fileList"
-          :auto-upload="false"
-          :show-file-list="false"
-          :on-change="searchImage"
-        >
-          <i class="el-icon-picture-outline"></i>
-        </el-upload>
-      </template>
-      <el-button
-        slot="append"
-        icon="el-icon-search"
-        @click="search"
-      ></el-button>
-    </el-input>
+    <SearchInput class="search-input" :input.sync="input" @search="search" @uploadFile="searchImage"/>
   </el-main>
 </template>
 
 <script>
+import SearchInput from '@/components/SearchInput'
 export default {
   name: "Home",
+  components:{
+    SearchInput
+  },
   data: () => ({
     input: "",
-    fileList:[],
   }),
   methods: {
     search() {
