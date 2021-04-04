@@ -18,7 +18,7 @@
         :image-list="imageList"
       />
       </template>
-      <template v-else>
+      <template v-if="info">
             <VueAudio :audio-info="info" />
       </template>
     </div>
