@@ -1,5 +1,5 @@
 <template >
-  <el-main>
+  <el-main class="container">
     <SearchInput
       class="search-input"
       :input.sync="input"
