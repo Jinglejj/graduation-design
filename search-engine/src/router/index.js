@@ -8,10 +8,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: ()=>import('@/views/home')
-  },{
-    path:'/result',
-    name:'Result',
-    component: ()=>import('@/views/result')
   }
 ]
 
