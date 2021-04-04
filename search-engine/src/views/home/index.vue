@@ -1,15 +1,22 @@
 <template >
   <el-main>
-    <SearchInput class="search-input" :input.sync="input" @search="search" @uploadFile="searchImage"/>
+    <SearchInput
+      class="search-input"
+      :input.sync="input"
+      @search="search"
+      @uploadFile="searchImage"
+    />
   </el-main>
 </template>
 
 <script>
-import SearchInput from '@/components/SearchInput'
+import SearchInput from "@/components/SearchInput";
+import ShowImage from "@/components/ShowImage";
 export default {
   name: "Home",
-  components:{
-    SearchInput
+  components: {
+    SearchInput,
+    ShowImage,
   },
   data: () => ({
     input: "",
@@ -19,8 +26,8 @@ export default {
       console.log(this.input);
     },
     searchImage(file) {
-      console.log(file) ;
-    }
+      console.log(file);
+    },
   },
 };
 </script>
