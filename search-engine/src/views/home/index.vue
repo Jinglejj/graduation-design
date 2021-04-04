@@ -9,17 +9,17 @@
         @uploadFile="searchImage"
       />
     </div>
-    <div  class="result-container">
+    <div class="result-container">
       <template v-if="imageList.length">
-              <ShowImage 
-        v-for="url in imageList"
-        :key="url"
-        :image-url="url"
-        :image-list="imageList"
-      />
+        <ShowImage
+          v-for="url in imageList"
+          :key="url"
+          :image-url="url"
+          :image-list="imageList"
+        />
       </template>
       <template v-if="info">
-            <VueAudio :audio-info="info" />
+        <VueAudio :audio-info="info" />
       </template>
     </div>
   </el-main>
@@ -45,7 +45,7 @@ export default {
   components: {
     SearchInput,
     ShowImage,
-    VueAudio
+    VueAudio,
   },
   data: () => ({
     input: "",
