@@ -29,13 +29,13 @@
                            class="bell"
                            @click="handleMute"
                         ></i>
-                        <el-slider
-                                v-show="showVolume"
-                                v-model="volume"
-                                class="volume"
-                                @change="changeVolume()"
-                        >
-                        </el-slider>
+<!--                        <el-slider-->
+<!--                                v-show="showVolume"-->
+<!--                                v-model="volume"-->
+<!--                                class="volume"-->
+<!--                                @change="changeVolume()"-->
+<!--                        >-->
+<!--                        </el-slider>-->
                     </div>
                 </div>
             </div>
@@ -79,8 +79,7 @@
             },
             updateAudio() {
                 var audio = this.$refs.audio
-                console.log(this.audioInfo.currentTime);
-                audio.currentTime = this.audioInfo.currentTime
+                 audio.currentTime = this.audioInfo.currentTime
             },
             /**
              * @param value 百分比 整数
@@ -89,18 +88,19 @@
                 var current = parseInt(newValue / 100 * this.audioInfo.endTime)
                 this.audioInfo.currentTime = current
             },
-            changeVolume() {
-                var audio = this.$refs.audio
-                audio.volume = this.volume / 100
-                if (this.volume == 0) {
-                    this.volumeIcon = "el-icon-close-notification"
-                } else {
-                    this.volumeIcon = "el-icon-bell"
-                }
-            },
+            // changeVolume() {
+            //     var audio = this.$refs.audio
+            //     audio.volume = this.volume / 100
+            //     if (this.volume == 0) {
+            //         this.volumeIcon = "el-icon-close-notification"
+            //     } else {
+            //         this.volumeIcon = "el-icon-bell"
+            //     }
+            // },
             onPlay() {//播放时 调整进度条 currentTime的修改
                 this.audioInfo.currentTime = this.$refs.audio.currentTime
-            }, myTransTime(value) {
+            },
+            myTransTime(value) {
                 return transTime(value);
             },
             handleMute() {
@@ -123,7 +123,8 @@
             },
             seeVolumeIcon() {
                 this.showVolume = true
-            }, hideVolume() {
+            },
+            hideVolume() {
                 this.showVolume = false
             }
         }, props: ['audioInfo'],
