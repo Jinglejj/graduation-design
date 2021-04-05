@@ -60,10 +60,7 @@ export default {
     search() {
       console.log(this.input);
       this.imageList = [];
-      this.style = {
-        left: 0,
-        transform: `translate(0, 0)`,
-      };
+      this.toggle(); //过渡动画
       setTimeout(() => {
         this.info = {
           src: "http://106.14.137.176:8080/blog/static/1.mp3",
@@ -78,13 +75,18 @@ export default {
     searchImage(file) {
       console.log(file);
       this.info = null;
-      this.style = {
-        left: 0,
-        transform: `translate(0, 0)`,
-      };
+      this.toggle();
       setTimeout(() => {
         this.imageList = imageData;
       }, 400);
+    },
+    toggle() {
+      if (this.style.left === "50%") {
+        this.style = {
+          left: 0,
+          transform: `translate(0, 0)`,
+        };
+      }
     },
   },
 };
