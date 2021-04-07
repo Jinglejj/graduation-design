@@ -170,7 +170,7 @@
     .percentage {
         width: 200px;
         margin-left: 105px;
-        position: absolute;
+         position: absolute;
         margin-top: 10px
     }
 
@@ -212,6 +212,7 @@
     .control {
         width: 800px;
         height: 50px;
+        position: relative;
     }
 
     .text {
