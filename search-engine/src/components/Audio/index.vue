@@ -47,9 +47,8 @@
 </template>
 <script>
     import {transTime} from '../../utils/index'
-
     export default {
-        name: "VueAudio",
+        name: "Audio",
         data() {
             return {
                 volume: 100,
@@ -89,8 +88,8 @@
                 this.audioInfo.currentTime = current
             },
             // changeVolume() {
-            //     var audio = this.$refs.audio
-            //     audio.volume = this.volume / 100
+            //     var Audio = this.$refs.Audio
+            //     Audio.volume = this.volume / 100
             //     if (this.volume == 0) {
             //         this.volumeIcon = "el-icon-close-notification"
             //     } else {
