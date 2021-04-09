@@ -24,7 +24,6 @@
         components: {},
         props: ['textInfo'],
         mounted() {
-            console.log(this.textInfo)
         }
     }
 </script>
@@ -51,6 +50,7 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        margin-top: -10px;
     }
 
     .innerBox {
