@@ -19,7 +19,7 @@
                 />
             </template>
             <template v-if="audioInfo">
-                <Audio :key="audio.id" v-for="audio in audioInfo" :audio-info="audio"/>
+                <AudioList  :audio-info="audioInfo"/>
             </template>
             <template v-if="textInfo">
                 <TextInfo :key="text.id" v-for="text in textInfo" :text-info="text" />
@@ -31,9 +31,8 @@
 <script>
     import SearchInput from "@/components/SearchInput";
     import ShowImage from "@/components/ShowImage";
-    import Audio from "@/components/Audio";
     import TextInfo from "@/components/TextInfo";
-
+    import AudioList from '@/components/AudioList'
     const imageData = [
         "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
         "https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg",
@@ -50,7 +49,7 @@
         components: {
             SearchInput,
             ShowImage,
-            Audio,
+            AudioList,
             TextInfo
         },
         data: () => ({
@@ -71,39 +70,162 @@
                 setTimeout(() => {
                    this.audioInfo = [
                        {
-                       "duration": 1799000,
-                       "start_time": 1456910,
-                       "score": 14.713808,
-                       "@timestamp": "2021-04-09T01:52:43.641Z",
-                       "file_name": "xinwen_20210402_0700_0730.wav",
-                       "@version": "1",
-                       "id": 2633,
-                       "sentence_text": "<span style= 'color:red'>郑</span><span style= 'color:red'>州</span><span style= 'color:red'>南</span><span style= 'color:red'>站</span>是<span style= 'color:red'>郑</span>渝高速铁路正负高速铁路，<span style= 'color:red'>郑</span>登洛城际铁路、济<span style= 'color:red'>南</span>城际铁路的交汇车<span style= 'color:red'>站</span>。通过高铁联络线，<span style= 'color:red'>郑</span><span style= 'color:red'>州</span><span style= 'color:red'>南</span><span style= 'color:red'>站</span>和<span style= 'color:red'>郑</span><span style= 'color:red'>州</span><span style= 'color:red'>站</span>、<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>东<span style= 'color:red'>站</span>互联互通。",
-                       "type": "audio"
-                   },
-                       {
                            "duration": 1799000,
-                           "start_time": 1444280,
-                           "score": 6.9705358,
+                           "start_time": 1456910,
+                           "score": 14.713808,
                            "@timestamp": "2021-04-09T01:52:43.641Z",
                            "file_name": "xinwen_20210402_0700_0730.wav",
                            "@version": "1",
-                           "id": 2632,
-                           "sentence_text": "昨天，<span style= 'color:red'>郑</span><span style= 'color:red'>州</span><span style= 'color:red'>南</span><span style= 'color:red'>站</span>全面封顶，预计二零二二年投入使用。",
+                           "id": 2633,
+                           "sentence_text": "<span style= 'color:red'>郑</span><span style= 'color:red'>州</span><span style= 'color:red'>南</span><span style= 'color:red'>站</span>是<span style= 'color:red'>郑</span>渝高速铁路正负高速铁路，<span style= 'color:red'>郑</span>登洛城际铁路、济<span style= 'color:red'>南</span>城际铁路的交汇车<span style= 'color:red'>站</span>。通过高铁联络线，<span style= 'color:red'>郑</span><span style= 'color:red'>州</span><span style= 'color:red'>南</span><span style= 'color:red'>站</span>和<span style= 'color:red'>郑</span><span style= 'color:red'>州</span><span style= 'color:red'>站</span>、<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>东<span style= 'color:red'>站</span>互联互通。",
                            "type": "audio"
                        },
                        {
                            "duration": 1799000,
-                           "start_time": 1421570,
-                           "score": 5.352648,
-                           "@timestamp": "2021-04-09T01:52:43.641Z",
+                           "start_time": 122130,
+                           "score": 5.136117,
+                           "@timestamp": "2021-04-09T01:52:43.609Z",
                            "file_name": "xinwen_20210402_0700_0730.wav",
                            "@version": "1",
-                           "id": 2630,
-                           "sentence_text": "中国<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>将于五月十一号至十二号在<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>举办。",
+                           "id": 2512,
+                           "sentence_text": "空气质量指数八十三，属于良<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>市今天尾号五和零的机动车限行。欢迎收听河<span style= 'color:red'>南</span>新闻广播，河<span style= 'color:red'>南</span>经济广播正在并机直播的河<span style= 'color:red'>南</span>新闻。",
                            "type": "audio"
-                       }]
-                   this.textInfo=[{
+                       },
+                       {
+                           "duration": 1799000,
+                           "start_time": 472440,
+                           "score": 5.0144787,
+                           "@timestamp": "2021-04-09T01:52:43.619Z",
+                           "file_name": "xinwen_20210402_0700_0730.wav",
+                           "@version": "1",
+                           "id": 2545,
+                           "sentence_text": "河<span style= 'color:red'>南</span>台记者冉小辉报道，昨天，省政协十二届常委会第十八次会议在<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>闭幕，省政协主席刘伟出席并讲话。",
+                           "type": "audio"
+                       },
+                       {
+                           "duration": 1799000,
+                           "start_time": 583970,
+                           "score": 4.6614547,
+                           "@timestamp": "2021-04-09T01:52:43.622Z",
+                           "file_name": "xinwen_20210402_0700_0730.wav",
+                           "@version": "1",
+                           "id": 2557,
+                           "sentence_text": "唱颂歌乐舞敬拜，祈福中华天地人和拜祖大典组委会常务副主任、<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>市政协主席张延明与去年相比，现场恢复了九项议程的典礼，恢复了礼拜嘉宾。",
+                           "type": "audio"
+                       },
+                       {
+                           "duration": 1799000,
+                           "start_time": 1732350,
+                           "score": 4.3766966,
+                           "@timestamp": "2021-04-09T01:52:43.647Z",
+                           "file_name": "xinwen_20210402_0700_0730.wav",
+                           "@version": "1",
+                           "id": 2659,
+                           "sentence_text": "看眼科就到<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>爱尔眼科爱眼热线零三七幺五六幺八幺六零零。",
+                           "type": "audio"
+                       },
+                       {
+                           "duration": 1799000,
+                           "start_time": 648120,
+                           "score": 4.176347,
+                           "@timestamp": "2021-04-09T01:52:43.623Z",
+                           "file_name": "xinwen_20210402_0700_0730.wav",
+                           "@version": "1",
+                           "id": 2562,
+                           "sentence_text": "为做好拜祖大典筹备工作，河<span style= 'color:red'>南</span>省<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>市分别成立专门机构，精心制定方案，科学谋划实施，统筹协调推进目前大典各项筹备工作正在有条不紊的推进。",
+                           "type": "audio"
+                       },
+                       {
+                           "duration": 1799000,
+                           "start_time": 160060,
+                           "score": 4.079747,
+                           "@timestamp": "2021-04-09T01:52:43.610Z",
+                           "file_name": "xinwen_20210402_0700_0730.wav",
+                           "@version": "1",
+                           "id": 2516,
+                           "sentence_text": "辛丑年，黄帝故里拜祖大典将于四月四号上午在新<span style= 'color:red'>郑</span>市黄帝故里举行。河<span style= 'color:red'>南</span>新闻广播特别策划清明我们祭先烈。",
+                           "type": "audio"
+                       },
+                       {
+                           "duration": 1799000,
+                           "start_time": 1052100,
+                           "score": 4.025157,
+                           "@timestamp": "2021-04-09T01:52:43.633Z",
+                           "file_name": "xinwen_20210402_0700_0730.wav",
+                           "@version": "1",
+                           "id": 2599,
+                           "sentence_text": "举个例子来说吧，<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>往返汝<span style= 'color:red'>州</span>的这条线路。",
+                           "type": "audio"
+                       },
+                       {
+                           "duration": 1799000,
+                           "start_time": 1000170,
+                           "score": 3.6466012,
+                           "@timestamp": "2021-04-09T01:52:43.631Z",
+                           "file_name": "xinwen_20210402_0700_0730.wav",
+                           "@version": "1",
+                           "id": 2595,
+                           "sentence_text": "省道路客运联网售票平台目前已开通<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>、洛阳、许昌、平顶山等十多个城市，六十多条线路的定制客运服务，从家门口直达目的地的服务模式。",
+                           "type": "audio"
+                       },
+                       {
+                           "duration": 1799000,
+                           "start_time": 1721080,
+                           "score": 3.525216,
+                           "@timestamp": "2021-04-09T01:52:43.647Z",
+                           "file_name": "xinwen_20210402_0700_0730.wav",
+                           "@version": "1",
+                           "id": 2658,
+                           "sentence_text": "<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>爱尔眼科三位一体青少年近视防控体系，帮妈妈减少孩子最炫的烦恼。",
+                           "type": "audio"
+                       },
+                       {
+                           "duration": 1799000,
+                           "start_time": 1586410,
+                           "score": 3.4609919,
+                           "@timestamp": "2021-04-09T01:52:43.644Z",
+                           "file_name": "xinwen_20210402_0700_0730.wav",
+                           "@version": "1",
+                           "id": 2646,
+                           "sentence_text": "省会<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>市。今天白天到夜里，阴天有小雨或零星小雨，东北风三到四级。",
+                           "type": "audio"
+                       },
+                       {
+                           "duration": 1799000,
+                           "start_time": 526770,
+                           "score": 3.3357148,
+                           "@timestamp": "2021-04-09T01:52:43.621Z",
+                           "file_name": "xinwen_20210402_0700_0730.wav",
+                           "@version": "1",
+                           "id": 2552,
+                           "sentence_text": "河<span style= 'color:red'>南</span>新闻广播河<span style= 'color:red'>南</span>新闻正在直播。接下来您将听到辛丑年黄帝故里拜祖大典将于四月十四号上午在新<span style= 'color:red'>郑</span>市黄帝故里举行。",
+                           "type": "audio"
+                       },
+                       {
+                           "duration": 1799000,
+                           "start_time": 622000,
+                           "score": 3.1775873,
+                           "@timestamp": "2021-04-09T01:52:43.623Z",
+                           "file_name": "xinwen_20210402_0700_0730.wav",
+                           "@version": "1",
+                           "id": 2560,
+                           "sentence_text": "黄河文明拜祖大典组委会宣传活动部常务副部长、<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>市委宣传部副部长石大东。今年呢网上拜祖平台以黄色为主基调，平台上各元素。",
+                           "type": "audio"
+                       },
+                       {
+                           "duration": 1799000,
+                           "start_time": 109720,
+                           "score": 3.119945,
+                           "@timestamp": "2021-04-09T01:52:43.608Z",
+                           "file_name": "xinwen_20210402_0700_0730.wav",
+                           "@version": "1",
+                           "id": 2511,
+                           "sentence_text": "今天是四月二号星期五，农历二月二十一，<span style= 'color:red'>郑</span><span style= 'color:red'>州</span>市今天白天到夜里，阴天有小雨或零星小雨，东北风三到四级，最高温度十四到十五度，最低温度十到十一度。",
+                           "type": "audio"
+                       }
+                   ]
+                   this.textInfo=[
+                       {
                        "author_name": "北青网",
                        "date": "2021-03-28T13:19:00.000Z",
                        "score": 9.308606,
