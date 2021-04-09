@@ -1,11 +1,12 @@
 <template>
 
     <el-card class="box" shadow="hover">
-<!--        <div class="title">-->
-<!--            <h2>Title</h2>-->
-<!--        </div>-->
+        <!--        <div class="title">-->
+        <!--            <h2>Title</h2>-->
+        <!--        </div>-->
         <div class="control">
             <audio ref='audio'
+                   preload="none"
                    :src="audioInfo.file_name"
                    @timeupdate="onPlay()"
             ></audio>
@@ -14,7 +15,7 @@
                         :class="playIcon"
                         class="playButton"
                         @click="playAudio()"></i>
-                <span class="start_time">{{myTransTime(audioInfo.start_time)}}</span>
+                <span class="start_time">{{myTransTime(this.playTime)}}</span>
                 <div class="percentage">
                     <el-slider v-model="percentage" :show-tooltip="false" @change="updateAudio"></el-slider>
                 </div>
@@ -23,24 +24,30 @@
                      @mouseenter="seeVolumeIcon"
                      @mouseleave="hideVolume"
                 >
-                    <div style="margin-top: 5px;">
+                    <div>
                         <i :class="volumeIcon"
                            v-show="showVolumeIcon"
                            class="bell"
                            @click="handleMute"
                         ></i>
-                        <!--                        <el-slider-->
-                        <!--                                v-show="showVolume"-->
-                        <!--                                v-model="volume"-->
-                        <!--                                class="volume"-->
-                        <!--                                @change="changeVolume()"-->
-                        <!--                        >-->
-                        <!--                        </el-slider>-->
+                        <!--                        <el-slider
+                                                        v-show="showVolume"
+                                                        v-model="volume"
+                                                        class="volume"
+                                                        @change="changeVolume()"
+                                                >
+                                                </el-slider>-->
+                        <el-button style="margin-left: 20px" @click="goLast()" circle icon="el-icon-arrow-left"
+                                   :disabled="this.disabledLastPlay">
+                        </el-button>
+                        <el-button style="" @click="goNext()" circle icon="el-icon-arrow-right"
+                                   :disabled="this.disabledNextPlay">
+                        </el-button>
                     </div>
                 </div>
             </div>
         </div>
-        <p class="sentence_text" v-html="this.audioInfo.sentence_text">
+        <p class="sentence_text" v-html="this.audioInfo.sentence_text[this.playIndex-1]">
         </p>
     </el-card>
 </template>
@@ -56,7 +63,9 @@
                 playIcon: "el-icon-video-play",
                 volumeIcon: "el-icon-bell",
                 showVolume: false,//音效的调整框
-                showVolumeIcon: true//音效图标
+                showVolumeIcon: true,//音效图标
+                playIndex: 1,//默认播放第1个
+                playTime:0,//当前的播放时间
             }
         },
         methods: {
@@ -78,14 +87,13 @@
             },
             updateAudio() {
                 var audio = this.$refs.audio
-                audio.currentTime = this.audioInfo.start_time
+                audio.currentTime = this.playTime
             },
             /**
              * @param value 百分比 整数
              * */
             changePercentage(newValue) {//用于 非播放时 调整进度条 currentTime的修改
-                console.log("newValue:" + newValue + "\t duration" + this.audioInfo.duration)
-                this.audioInfo.start_time = parseInt(newValue / 100 * this.audioInfo.duration)
+                this.playTime = parseInt(newValue / 100 * this.audioInfo.duration)
             },
             // changeVolume() {
             //     var Audio = this.$refs.Audio
@@ -97,8 +105,7 @@
             //     }
             // },
             onPlay() {//播放时 调整进度条 currentTime的修改
-                console.log("currentTime" + this.$refs.audio.currentTime)
-                this.audioInfo.start_time = this.$refs.audio.currentTime
+                this.playTime = this.$refs.audio.currentTime
             },
             myTransTime(value) {
                 return transTime(value);
@@ -126,26 +133,44 @@
             },
             hideVolume() {
                 this.showVolume = false
+            },
+            goLast() {
+                this.playIndex -= 1
+                this.$refs.audio.currentTime = this.audioInfo.start_time[this.playIndex - 1]
+            },
+            goNext() {
+                this.playIndex += 1
+                this.$refs.audio.currentTime = this.audioInfo.start_time[this.playIndex - 1]
             }
         }, props: ['audioInfo'],
         components: {},
         mounted() {
-            this.$refs.audio.currentTime = this.audioInfo.start_time
-        }, computed: {
+            //直接第一个
+            this.$refs.audio.currentTime = this.audioInfo.start_time[0]
+            this.playTime=this.audioInfo.start_time[0]
+         },
+        computed: {
             percentage: {//进度条改变才生效
                 get() {
-                    console.log("get")
-                    return this.audioInfo.start_time / this.audioInfo.duration * 100
-                }, set(newValue) {
+                    return this.playTime / this.audioInfo.duration * 100
+                },
+                set(newValue) {
                     //调整音频进度
-                    console.log("set");
                     this.changePercentage(newValue)
                 }
+            },
+            disabledLastPlay(){
+                if(this.playIndex<=1){
+                    return true
+                }
+                return false
+            },
+            disabledNextPlay(){
+                if(this.playIndex>=this.audioInfo.start_time.length){
+                    return true
+                }
+                return false
             }
-        }, created() {
-            this.audioInfo.file_name = "http://106.53.148.120:8989/download?fileName=" + this.audioInfo.file_name
-            this.audioInfo.start_time = parseInt(this.audioInfo.start_time / 1000)
-            this.audioInfo.duration = parseInt(this.audioInfo.duration / 1000)
         }
     }
 </script>
@@ -185,10 +210,9 @@
     .volumeBox {
         position: relative;
         float: left;
-        margin-top: 10px;
-        width: 75px;
-        height: 30px
-
+        width: 145px;
+        height: 30px;
+        margin-top: 5px;
     }
 
     .volumeBox >>> .el-slider__button {
@@ -207,6 +231,7 @@
         float: left;
         margin-left: 10px;
         font-weight: bold;
+        margin-top: 7px;
     }
 
     .volume {
