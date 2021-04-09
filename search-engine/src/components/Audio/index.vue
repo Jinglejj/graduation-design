@@ -1,24 +1,24 @@
 <template>
 
     <el-card class="box" shadow="hover">
-        <div class="title">
-            <h2>{{this.audioInfo.title}}</h2>
-        </div>
+<!--        <div class="title">-->
+<!--            <h2>Title</h2>-->
+<!--        </div>-->
         <div class="control">
             <audio ref='audio'
-                   :src="audioInfo.src"
+                   :src="audioInfo.file_name"
                    @timeupdate="onPlay()"
             ></audio>
-            <div >
+            <div>
                 <i
                         :class="playIcon"
                         class="playButton"
                         @click="playAudio()"></i>
-                <span class="currentTime">{{myTransTime(audioInfo.currentTime)}}</span>
+                <span class="start_time">{{myTransTime(audioInfo.start_time)}}</span>
                 <div class="percentage">
                     <el-slider v-model="percentage" :show-tooltip="false" @change="updateAudio"></el-slider>
                 </div>
-                <span class="endTime">{{myTransTime(audioInfo.endTime)}}</span>
+                <span class="duration">{{myTransTime(audioInfo.duration)}}</span>
                 <div class="volumeBox"
                      @mouseenter="seeVolumeIcon"
                      @mouseleave="hideVolume"
@@ -29,24 +29,24 @@
                            class="bell"
                            @click="handleMute"
                         ></i>
-<!--                        <el-slider-->
-<!--                                v-show="showVolume"-->
-<!--                                v-model="volume"-->
-<!--                                class="volume"-->
-<!--                                @change="changeVolume()"-->
-<!--                        >-->
-<!--                        </el-slider>-->
+                        <!--                        <el-slider-->
+                        <!--                                v-show="showVolume"-->
+                        <!--                                v-model="volume"-->
+                        <!--                                class="volume"-->
+                        <!--                                @change="changeVolume()"-->
+                        <!--                        >-->
+                        <!--                        </el-slider>-->
                     </div>
                 </div>
             </div>
         </div>
-        <div class="text">
-            <p>{{this.audioInfo.text}}</p>
-        </div>
+        <p class="sentence_text" v-html="this.audioInfo.sentence_text">
+        </p>
     </el-card>
 </template>
 <script>
     import {transTime} from '../../utils/index'
+
     export default {
         name: "Audio",
         data() {
@@ -78,14 +78,14 @@
             },
             updateAudio() {
                 var audio = this.$refs.audio
-                 audio.currentTime = this.audioInfo.currentTime
+                audio.currentTime = this.audioInfo.start_time
             },
             /**
              * @param value 百分比 整数
              * */
             changePercentage(newValue) {//用于 非播放时 调整进度条 currentTime的修改
-                var current = parseInt(newValue / 100 * this.audioInfo.endTime)
-                this.audioInfo.currentTime = current
+                console.log("newValue:" + newValue + "\t duration" + this.audioInfo.duration)
+                this.audioInfo.start_time = parseInt(newValue / 100 * this.audioInfo.duration)
             },
             // changeVolume() {
             //     var Audio = this.$refs.Audio
@@ -97,7 +97,8 @@
             //     }
             // },
             onPlay() {//播放时 调整进度条 currentTime的修改
-                this.audioInfo.currentTime = this.$refs.audio.currentTime
+                console.log("currentTime" + this.$refs.audio.currentTime)
+                this.audioInfo.start_time = this.$refs.audio.currentTime
             },
             myTransTime(value) {
                 return transTime(value);
@@ -129,15 +130,22 @@
         }, props: ['audioInfo'],
         components: {},
         mounted() {
+            this.$refs.audio.currentTime = this.audioInfo.start_time
         }, computed: {
             percentage: {//进度条改变才生效
                 get() {
-                    return this.audioInfo.currentTime / this.audioInfo.endTime * 100
+                    console.log("get")
+                    return this.audioInfo.start_time / this.audioInfo.duration * 100
                 }, set(newValue) {
                     //调整音频进度
+                    console.log("set");
                     this.changePercentage(newValue)
                 }
             }
+        }, created() {
+            this.audioInfo.file_name = "http://106.53.148.120:8989/download?fileName=" + this.audioInfo.file_name
+            this.audioInfo.start_time = parseInt(this.audioInfo.start_time / 1000)
+            this.audioInfo.duration = parseInt(this.audioInfo.duration / 1000)
         }
     }
 </script>
@@ -153,14 +161,14 @@
         font-weight: bold;
     }
 
-    .currentTime {
+    .start_time {
         float: left;
         margin-left: 5px;
         margin-top: 20px;
         font-weight: bold;
     }
 
-    .endTime {
+    .duration {
         float: left;
         margin-left: 230px;
         margin-top: 20px;
@@ -170,7 +178,7 @@
     .percentage {
         width: 200px;
         margin-left: 105px;
-         position: absolute;
+        position: absolute;
         margin-top: 10px
     }
 
@@ -182,19 +190,22 @@
         height: 30px
 
     }
-    .volumeBox >>>.el-slider__button{
-            width: 10px;
-            height: 10px;
+
+    .volumeBox >>> .el-slider__button {
+        width: 10px;
+        height: 10px;
     }
-    .percentage >>>.el-slider__button{
+
+    .percentage >>> .el-slider__button {
         width: 12px;
         height: 12px;
     }
+
     .bell {
         font-size: 25px;
         cursor: pointer;
         float: left;
-        margin-left:10px;
+        margin-left: 10px;
         font-weight: bold;
     }
 
@@ -206,7 +217,10 @@
     }
 
     .box {
-        width: 800px;
+        width: 595px;
+        margin: 5px;
+        padding: 5px;
+        height: 140px;
     }
 
     .control {
@@ -215,11 +229,12 @@
         position: relative;
     }
 
-    .text {
+    .sentence_text {
         text-align: left;
         text-indent: 2em;
     }
-    .title{
+
+    .title {
         height: 30px;
         margin-top: -25px;
     }
