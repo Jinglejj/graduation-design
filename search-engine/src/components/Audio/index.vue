@@ -136,10 +136,12 @@
             },
             goLast() {
                 this.playIndex -= 1
+                this.playTime=this.audioInfo.start_time[this.playIndex - 1]
                 this.$refs.audio.currentTime = this.audioInfo.start_time[this.playIndex - 1]
             },
             goNext() {
                 this.playIndex += 1
+                this.playTime= this.audioInfo.start_time[this.playIndex - 1]
                 this.$refs.audio.currentTime = this.audioInfo.start_time[this.playIndex - 1]
             }
         }, props: ['audioInfo'],
