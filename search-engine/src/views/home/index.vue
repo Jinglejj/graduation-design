@@ -18,6 +18,9 @@
                         :image-list="imageList"
                 />
             </template>
+            <template v-if="textInfo">
+                <MediaUpload></MediaUpload>
+            </template>
             <template v-if="audioInfo">
                 <AudioList  :audio-info="audioInfo"/>
             </template>
@@ -33,6 +36,7 @@
     import ShowImage from "@/components/ShowImage";
     import TextInfo from "@/components/TextInfo";
     import AudioList from '@/components/AudioList'
+    import MediaUpload from '@/components/MediaUpload'
     const imageData = [
         "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
         "https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg",
@@ -50,7 +54,8 @@
             SearchInput,
             ShowImage,
             AudioList,
-            TextInfo
+            TextInfo,
+            MediaUpload
         },
         data: () => ({
             input: "",
