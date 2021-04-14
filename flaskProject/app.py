@@ -1,6 +1,6 @@
 import os
 from flask import Flask,jsonify, session, redirect, url_for, render_template, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from werkzeug.utils import secure_filename
 from services.search import search_images
 import numpy as np
@@ -24,8 +24,12 @@ def hello_world():
 
 
 @app.route('/upload', methods=["POST"])
+@cross_origin()
 def up_pic():
     file = request.files['file']
+    page_size=request.form.get('pageSize',default=1)
+    page_number=request.form.get('pageNumber',default=20)
+    print(page_size,page_number)
     base_path = os.path.dirname(__file__)  # 当前文件所在路径
     upload_path = os.path.join(base_path, "static/uploads", secure_filename(file.filename))
     file.save(upload_path)
