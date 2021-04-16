@@ -463,10 +463,10 @@ export default {
       }, 400);
     },
     async searchImage(file) {
-      console.log(file);
       this.audioInfo = null;
       this.toggle();
-      const { data = imageData } = await searchImage(file);
+      console.log(file)
+      const { data = imageData } = await searchImage(file.raw);
       setTimeout(() => {
         this.imageList = data;
       }, 400);
