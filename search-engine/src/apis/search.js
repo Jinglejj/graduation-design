@@ -6,7 +6,7 @@ export const searchImage = ( file, pageNumber = 1, pageSize = 20 ) => {
   formData.append("pageSize",pageSize);
   formData.append("pageNumber",pageNumber)
   return request({
-    url: `http://127.0.0.1:5000/upload`,
+    url: `${IMAGE_API}/upload`,
     method: "post",
     headers:{
       'Content-Type':'multipart/form-data'

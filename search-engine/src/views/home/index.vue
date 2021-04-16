@@ -466,9 +466,10 @@ export default {
       this.audioInfo = null;
       this.toggle();
       console.log(file)
-      const { data = imageData } = await searchImage(file.raw);
+      const { data } = await searchImage(file.raw);
       setTimeout(() => {
-        this.imageList = data;
+        this.imageList = data.map(e=>`${process.env.VUE_APP_IMAGE_API}/${e.split('\\').join('/')}`);
+        console.log(this.imageList)
       }, 400);
     },
     toggle() {
