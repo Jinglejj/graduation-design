@@ -14,11 +14,11 @@ export const searchImage = ( file, pageNumber = 1, pageSize = 20 ) => {
     data: formData,
   });
 };
+//data{keyword,pageNum,pageSize}
+const searchAudio = ({ data }) => {
+  //todo
+};
 
-// const searchAudio = ({ keyword }) => {
-//   //todo
-// };
-
-// const searchVideo = ({ keyword }) => {
-//   //todo
-// };
+const searchVideo = ({ data }) => {
+  //todo
+};
