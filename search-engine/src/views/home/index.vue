@@ -33,13 +33,15 @@
                 </el-tab-pane>
             </el-tabs>
         </div>
+        <div style="position:absolute;right:0px;bottom:0px;">
+            <router-link to="/login">登陆</router-link>
+        </div>
     </el-main>
 </template>
 
 <script>
     import SearchInput from "@/components/SearchInput";
     import ShowImage from "@/components/ShowImage";
-    import MediaUpload from "@/components/MediaUpload";
     import {searchImage} from "@/apis/search";
     import TextPage from "@/views/textPage"
     import AudioPage from "@/views/audioPage"
@@ -59,7 +61,6 @@
         components: {
             SearchInput,
             ShowImage,
-            MediaUpload,
             TextPage,
             AudioPage
         },
