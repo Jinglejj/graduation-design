@@ -18,15 +18,17 @@ export const searchImage = ( file, pageNumber = 1, pageSize = 20 ) => {
 };
 //data{keyword,pageNum,pageSize}
 export const searchText = (keyword,pageNum,pageSize) => {
-  console.log(`${Text_API}/searchText/${keyword}/${pageNum}/${pageSize}`)
   return request({
     url: `${Text_API}/searchText/${keyword}/${pageNum}/${pageSize}`,
     method: "get"
   });
 };
 
-export const searchAudio = ({ data }) => {
-//todo
+export const searchAudio = (keyword,pageNum,pageSize)  => {
+  return request({
+    url: `${Text_API}/searchAudio/${keyword}/${pageNum}/${pageSize}`,
+    method: "get"
+  });
 };
 
 export const searchVideo = ({ data }) => {

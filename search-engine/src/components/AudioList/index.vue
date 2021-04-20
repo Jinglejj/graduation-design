@@ -19,10 +19,12 @@
         props:['audioInfo'],
         methods: {
             parseInfo(){
+                this.results=[]
                 var x;
                 for(x in this.audioInfo){
                     this.checkInfo(this.audioInfo[x])
                 }
+                this.sendResultsLength()
              },
             checkInfo(obj){
                 //长度为0直接添加
@@ -54,11 +56,13 @@
                      }
                  }
 
+            },sendResultsLength(){
+                this.$emit('func',this.results.length)
             }
         },
         components: {Audio},
         mounted() {
-            this.parseInfo()
+
         }
     }
 </script>
