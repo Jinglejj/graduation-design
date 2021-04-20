@@ -33,7 +33,6 @@
         methods: {
             async searchAudio(){
                 const {data} = await searchAudio(this.keyWord,this.pageNum,this.pageSize);
-                console.log(data)
                 if(data.code!==100){
                     this.$message.error("查询出错音频，请更换关键词！")
                 }
