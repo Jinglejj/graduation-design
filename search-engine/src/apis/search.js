@@ -1,5 +1,7 @@
 import request from "./request";
 const IMAGE_API = process.env.VUE_APP_IMAGE_API;
+const Text_API = process.env.VUE_APP_TEXT_API;
+const Media_API = process.env.VUE_APP_MEDIA_API;
 export const searchImage = ( file, pageNumber = 1, pageSize = 20 ) => {
   const formData =new FormData();
   formData.append("file",file);
@@ -15,10 +17,18 @@ export const searchImage = ( file, pageNumber = 1, pageSize = 20 ) => {
   });
 };
 //data{keyword,pageNum,pageSize}
-const searchAudio = ({ data }) => {
-  //todo
+export const searchText = (keyword,pageNum,pageSize) => {
+  console.log(`${Text_API}/searchText/${keyword}/${pageNum}/${pageSize}`)
+  return request({
+    url: `${Text_API}/searchText/${keyword}/${pageNum}/${pageSize}`,
+    method: "get"
+  });
 };
 
-const searchVideo = ({ data }) => {
+export const searchAudio = ({ data }) => {
+//todo
+};
+
+export const searchVideo = ({ data }) => {
   //todo
 };
