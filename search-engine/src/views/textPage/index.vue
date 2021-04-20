@@ -33,9 +33,9 @@
         methods: {
             async searchText(){
                 const {data} = await searchText(this.keyWord,this.pageNum,this.pageSize);
-                console.log(data)
+               // console.log(data)
                 if(data.code!==100){
-                 this.$message.error("查询出错，请更换关键词！")
+                 this.$message.error("查询文本出错，请更换关键词！")
                 }
                 this.textInfo=data.map.data.results
                 this.totalCount=data.map.data.total
