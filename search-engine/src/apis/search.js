@@ -1,7 +1,6 @@
 import request from "./request";
 const IMAGE_API = process.env.VUE_APP_IMAGE_API;
-const Text_API = process.env.VUE_APP_TEXT_API;
-const Media_API = process.env.VUE_APP_MEDIA_API;
+const SEARCH_API = process.env.VUE_APP_SEARCH_API_API;
 export const searchImage = ( file, pageNumber = 1, pageSize = 20 ) => {
   const formData =new FormData();
   formData.append("file",file);
@@ -19,14 +18,14 @@ export const searchImage = ( file, pageNumber = 1, pageSize = 20 ) => {
 //data{keyword,pageNum,pageSize}
 export const searchText = (keyword,pageNum,pageSize) => {
   return request({
-    url: `${Text_API}/searchText/${keyword}/${pageNum}/${pageSize}`,
+    url: `${SEARCH_API}/searchText/${keyword}/${pageNum}/${pageSize}`,
     method: "get"
   });
 };
 
 export const searchAudio = (keyword,pageNum,pageSize)  => {
   return request({
-    url: `${Text_API}/searchAudio/${keyword}/${pageNum}/${pageSize}`,
+    url: `${SEARCH_API}/searchAudio/${keyword}/${pageNum}/${pageSize}`,
     method: "get"
   });
 };
