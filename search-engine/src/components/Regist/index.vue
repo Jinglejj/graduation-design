@@ -24,7 +24,7 @@
 
             <el-form-item prop="password">
         <span class="svg-container">
-          <i class="el-icon-view"></i>
+          <i class="el-icon-lock"></i>
         </span>
                 <el-input
                         :key="passwordType"
