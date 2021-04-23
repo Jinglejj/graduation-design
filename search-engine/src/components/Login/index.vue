@@ -79,6 +79,9 @@
                         if(data.code===200){//修改状态=》跳转admin
                             this.$store.commit('toLogin')
                             this.$router.push('admin')
+                        }else{
+                            this.$message.error("账号或密码错误！")
+                            this.loginForm.password=''
                         }
                      } else {
                         console.log('error submit!!')
