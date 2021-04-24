@@ -33,7 +33,7 @@
                 if (isWAV) {
                     this.uploadUrl = "http://106.53.148.120:8989//uploadVoice"
                 } else if (isMp4) {
-                    this.uploadUrl = ""
+                    this.uploadUrl = "http://106.53.148.120:8989//uploadVideo"
                 }
 
                 if (!isWAV && !isMp4) {
@@ -51,7 +51,7 @@
                 formData.append('file', param.file)
                 console.log(param.file.name)
                 //上传中
-                this.axios.post('http://106.53.148.120:8989//uploadVoice',
+                this.axios.post(this.uploadUrl,
                               formData,
                              {headers: {'Content-Type':'multipart/form-data'}}).then(({data}) => {
                         if(data.code===200){
