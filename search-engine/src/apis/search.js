@@ -30,6 +30,9 @@ export const searchAudio = (keyword,pageNum,pageSize)  => {
   });
 };
 
-export const searchVideo = ({ data }) => {
-  //todo
+export const searchVideo =  (keyword,pageNum,pageSize)  => {
+  return request({
+    url: `${SEARCH_API}/searchVideo/${keyword}/${pageNum}/${pageSize}`,
+    method: "get"
+  });
 };

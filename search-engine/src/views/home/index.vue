@@ -18,7 +18,7 @@
                     <AudioPage :keyWord="input" ref="audioPage"></AudioPage>
                 </el-tab-pane>
                 <el-tab-pane label="视频检索" class="el-tab-pane">
-                    <h1>视频检索结果</h1>
+                    <VideoPage :keyWord="input" ref="videoPage"></VideoPage>
                 </el-tab-pane>
                 <el-tab-pane label="图片检索" class="el-tab-pane">
                     <h1>图片检索结果</h1>
@@ -45,6 +45,7 @@
     import {searchImage} from "@/apis/search";
     import TextPage from "@/views/textPage"
     import AudioPage from "@/views/audioPage"
+    import VideoPage from "@/views/videoPage"
     const imageData = [
         "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
         "https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg",
@@ -62,7 +63,8 @@
             SearchInput,
             ShowImage,
             TextPage,
-            AudioPage
+            AudioPage,
+            VideoPage
         },
         data: () => ({
             input: "",
@@ -77,8 +79,7 @@
         }),
         methods: {
             search() {
-                console.log(this.input);
-                if(this.input!==''){
+                 if(this.input!==''){
                     this.imageList = [];
                     this.toggle(); //过渡动画
                     this.loading=true
@@ -86,6 +87,7 @@
                         //加载数据
                         this.$refs.textPage.searchText();
                         this.$refs.audioPage.searchAudio();
+                        this.$refs.videoPage.searchVideo();
                         this.loading=false
                         this.showTabs = true
                     }, 400);

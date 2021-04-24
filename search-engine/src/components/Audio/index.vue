@@ -11,6 +11,9 @@
                    @timeupdate="onPlay()"
             ></audio>
             <div>
+                <div>
+                    <span>{{audioInfo.file_name.slice(6)}}</span>
+                </div>
                 <i
                         :class="playIcon"
                         class="playButton"
@@ -247,7 +250,7 @@
         width: 595px;
         margin: 5px;
         padding: 5px;
-        height: 140px;
+        /*height: 140px;*/
     }
 
     .control {
