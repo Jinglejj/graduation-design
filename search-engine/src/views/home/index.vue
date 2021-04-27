@@ -1,5 +1,8 @@
 <template>
     <el-main class="container">
+        <div v-if="showTitle" class="title">
+            <p>跨媒体信息检索系统</p>
+        </div>
         <div class="search-container">
             <SearchInput
                     :style="style"
@@ -75,10 +78,12 @@
             imageList: [],
             audioInfo: null,
             showTabs: false,
-            loading:false
+            loading:false,
+            showTitle:true,
         }),
         methods: {
             search() {
+                this.showTitle=false
                  if(this.input!==''){
                     this.imageList = [];
                     this.toggle(); //过渡动画
@@ -116,6 +121,14 @@
 </script>
 
 <style lang="scss" scoped>
+    .title{
+        font-size: 40px;
+        position: fixed;
+        margin-left: 39%;
+        margin-top: 130px;
+        font-weight: 600;
+    }
+
     .search-container {
         position: relative;
         height: 64px;
