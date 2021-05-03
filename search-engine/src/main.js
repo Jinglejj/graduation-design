@@ -8,7 +8,6 @@ import axios from 'axios'; /* 引入axios进行地址访问*/
 import store from './store'
 Vue.prototype.axios=axios
 Vue.use(ElementUI)
-
 Vue.config.productionTip = false
 
 new Vue({

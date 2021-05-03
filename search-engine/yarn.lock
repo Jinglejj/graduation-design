@@ -4316,6 +4316,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   resolved "https://registry.npm.taobao.org/graceful-fs/download/graceful-fs-4.2.6.tgz#ff040b2b0853b23c3d31027523706f1885d76bee"
   integrity sha1-/wQLKwhTsjw9MQJ1I3BvGIXXa+4=
 
+gsap@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.npm.taobao.org/gsap/download/gsap-2.1.3.tgz?cache=0&sync_timestamp=1616656240224&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fgsap%2Fdownload%2Fgsap-2.1.3.tgz#c63ee3a50f0b7dc3b46ed0845bb0f09049feb944"
+  integrity sha1-xj7jpQ8LfcO0btCEW7DwkEn+uUQ=
+
 gzip-size@^5.0.0:
   version "5.1.1"
   resolved "https://registry.npm.taobao.org/gzip-size/download/gzip-size-5.1.1.tgz?cache=0&sync_timestamp=1605523140245&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fgzip-size%2Fdownload%2Fgzip-size-5.1.1.tgz#cb9bee692f87c0612b232840a873904e4c135274"
@@ -8817,6 +8822,13 @@ vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.npm.taobao.org/vue-hot-reload-api/download/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
   integrity sha1-UylVzB6yCKPZkLOp+acFdGV+CPI=
+
+vue-leon@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.nlark.com/vue-leon/download/vue-leon-0.0.2.tgz#2df96cbfe85bf562eca043e04dbe6ae3d2bb9ebc"
+  integrity sha1-Lflsv+hb9WLsoEPgTb5q49K7nrw=
+  dependencies:
+    gsap "^2.1.3"
 
 "vue-loader-v16@npm:vue-loader@^16.1.0":
   version "16.1.2"
