@@ -20,42 +20,20 @@
 <script>
 import { searchText } from "@/apis/search";
 import TextInfo from "@/components/TextInfo";
-
+import ResultMixins from "@/mixins/result-mixins";
 export default {
   name: "TextPage",
-  props: {
-    keyword: {
-      type: String,
-      required: true,
-    },
-  },
+  mixins:[ResultMixins],
   components: {
     TextInfo,
   },
   data() {
     return {
       textInfo: null,
-      totalCount: 0,
-      pageNum: 1,
-      pageSize: 20,
     };
   },
-  computed: {
-    hidePage() {    
-      return this.totalCount < this.pageSize;
-    },
-  },
-  watch: {
-    keyword(val, oldVal) {
-      if (val !== oldVal) {
-        this.pageNum = 1;
-        this.pageSize = 20;
-        this.searchText();
-      }
-    },
-  },
   methods: {
-    async searchText() {
+    async search() {
       if (this.keyword.trim()) {
         const { data } = await searchText(
           this.keyword,
@@ -67,16 +45,8 @@ export default {
         this.textInfo = data.map.data.results;
         this.totalCount = data.map.data.total;
       }
-    },
-    handleCurrentChange(val) {
-      this.pageNum = val;
-      this.searchText();
-    },
-  },
-  created() {
-    //初始化获取数据
-    this.searchText();
-  },
+    }
+  }
 };
 </script>
 

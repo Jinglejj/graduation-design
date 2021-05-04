@@ -19,19 +19,18 @@
 <script>
     import AudioList from "@/components/AudioList";
     import {searchAudio} from "../../apis/search";
-
+    import ResultMixins from "@/mixins/result-mixins"
     export default {
         name: "AudioPage",
+        mixins:[ResultMixins],
+        components: {AudioList},
         data() {
             return {
                 audioInfo:null,
-                totalCount:0,
-                pageNum:1,
-                pageSize:20
             }
         },
         methods: {
-            async searchAudio(){
+            async search(){
                 const {data} = await searchAudio(this.keyWord,this.pageNum,this.pageSize);
                 if(data.code!==100){
                     this.$message.error("查询出错音频，请更换关键词！")
@@ -41,25 +40,8 @@
                 setTimeout(() => {
                     this.$refs.audioList.parseInfo();
                 }, 100);
-            },
-            handleCurrentChange(val) {
-                this.pageNum=val
-                this.searchText()
             },getMsgFromSon(data){
                 this.totalCount=data
-            }
-        },
-        components: {AudioList},
-        mounted() {
-
-        },
-        props:['keyWord'],
-        computed:{
-            hidePage:function () {
-                if(this.totalCount<20){
-                    return true//当仅有一页时隐藏分页
-                }
-                return false
             }
         }
     }

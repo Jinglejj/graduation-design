@@ -15,9 +15,9 @@
     <div class="result-container">
       <keep-alive>
         <Result v-if="showResult">
-          <TextPage slot="text" :keyword="keyword"/>
-          <AudioPage slot="audio" :keyWord="keyword"/>
-          <VideoPage slot="video" :keyWord="keyword"/>
+          <TextPage slot="text" :keyword="keyword" />
+          <AudioPage slot="audio" :keyword="keyword" />
+          <VideoPage slot="video" :keyword="keyword" />
         </Result>
       </keep-alive>
     </div>
@@ -58,7 +58,7 @@ export default {
   data: () => ({
     input: "",
     //解耦
-    keyword:'',
+    keyword: "",
     style: {
       left: "50%",
       transform: `translate(-50%, 240px)`,
@@ -72,7 +72,7 @@ export default {
       this.showTitle = false;
       if (this.input !== "") {
         this.toggle(); //过渡动画
-        this.keyword=this.input;
+        this.keyword = this.input;
         setTimeout(() => {
           this.showResult = true;
         }, 400);
