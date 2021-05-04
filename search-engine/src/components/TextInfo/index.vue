@@ -1,5 +1,4 @@
 <template>
-
     <el-card class="box" shadow="hover">
         <a :href="textInfo.url" target="_blank"><p class="title" v-html="textInfo.title"></p></a>
         <div class="innerBox">
@@ -37,8 +36,8 @@
     }
 
     .box {
-        width: 595px;
-        margin: 5px;
+        width: 95%;
+        margin: 5px 0;
         padding: 5px;
         height: 140px;
     }

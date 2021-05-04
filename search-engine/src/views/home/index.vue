@@ -1,8 +1,5 @@
 <template>
   <el-main class="container">
-    <!-- <div v-if="showTitle" class="title">
-            <p>跨媒体信息检索系统</p>
-        </div> -->
     <div class="search-container">
       <div class="logo" v-if="showTitle">
         <Logo />
@@ -15,33 +12,15 @@
         @uploadFile="searchImage"
       />
     </div>
-    <div class="result-container" v-loading="loading">
-      <el-tabs type="border-card" v-show="showTabs">
-        <el-tab-pane label="文本检索" class="el-tab-pane">
-          <TextPage :keyWord="input" ref="textPage"></TextPage>
-        </el-tab-pane>
-        <el-tab-pane label="音频检索" class="el-tab-pane">
-          <AudioPage :keyWord="input" ref="audioPage"></AudioPage>
-        </el-tab-pane>
-        <el-tab-pane label="视频检索" class="el-tab-pane">
-          <VideoPage :keyWord="input" ref="videoPage"></VideoPage>
-        </el-tab-pane>
-        <el-tab-pane label="图片检索" class="el-tab-pane">
-          <h1>图片检索结果</h1>
-          <template v-if="imageList.length">
-            <ShowImage
-              v-for="url in imageList"
-              :key="url"
-              :image-url="url"
-              :image-list="imageList"
-            />
-          </template>
-        </el-tab-pane>
-      </el-tabs>
+    <div class="result-container">
+      <keep-alive>
+        <Result v-if="showResult">
+          <TextPage slot="text" :keyword="keyword"/>
+          <AudioPage slot="audio" :keyWord="keyword"/>
+          <VideoPage slot="video" :keyWord="keyword"/>
+        </Result>
+      </keep-alive>
     </div>
-    <!-- <div style="position:absolute;right:0px;bottom:0px;">
-            <router-link to="/login">登陆</router-link>
-        </div> -->
   </el-main>
 </template>
 
@@ -53,6 +32,7 @@ import TextPage from "@/views/textPage";
 import AudioPage from "@/views/audioPage";
 import VideoPage from "@/views/videoPage";
 import Logo from "@/components/Logo";
+import Result from "./components/Result";
 const imageData = [
   "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
   "https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg",
@@ -73,33 +53,28 @@ export default {
     AudioPage,
     VideoPage,
     Logo,
+    Result,
   },
   data: () => ({
     input: "",
+    //解耦
+    keyword:'',
     style: {
       left: "50%",
       transform: `translate(-50%, 240px)`,
     },
     imageList: [],
-    audioInfo: null,
-    showTabs: false,
-    loading: false,
     showTitle: true,
+    showResult: false,
   }),
   methods: {
-    search() {
+    async search() {
       this.showTitle = false;
       if (this.input !== "") {
-        this.imageList = [];
         this.toggle(); //过渡动画
-        this.loading = true;
+        this.keyword=this.input;
         setTimeout(() => {
-          //加载数据
-          this.$refs.textPage.searchText();
-          this.$refs.audioPage.searchAudio();
-          this.$refs.videoPage.searchVideo();
-          this.loading = false;
-          this.showTabs = true;
+          this.showResult = true;
         }, 400);
       }
     },
