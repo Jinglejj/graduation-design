@@ -1,6 +1,6 @@
 export default {
   props: {
-    keyword: {
+    keyWord: {
       type: String,
       required: true,
     },
@@ -11,12 +11,12 @@ export default {
     pageSize: 20,
   }),
   computed: {
-    hidePage() {    
+    hidePage() {
       return this.totalCount < this.pageSize;
     },
   },
   watch: {
-    keyword(val, oldVal) {
+    keyWord(val, oldVal) {
       if (val !== oldVal) {
         this.pageNum = 1;
         this.pageSize = 20;

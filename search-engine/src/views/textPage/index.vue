@@ -34,9 +34,9 @@ export default {
   },
   methods: {
     async search() {
-      if (this.keyword.trim()) {
+      if (this.keyWord.trim()) {
         const { data } = await searchText(
-          this.keyword,
+          this.keyWord,
           this.pageNum,
           this.pageSize
         );
