@@ -1,6 +1,7 @@
 <template>
   <div>
     <template v-if="textInfo">
+      <p class="resultsTips">为您搜索到{{totalCount}}条相关新闻</p>
       <TextInfo :key="text.id" v-for="text in textInfo" :text-info="text" />
     </template>
     <div class="block">
@@ -14,6 +15,11 @@
       >
       </el-pagination>
     </div>
+    <template v-if="totalCount===0">
+      <p class="notFound">
+        抱歉没有找到与“<span>{{this.keyWord}}</span>”相关的新闻。
+      </p>
+    </template>
   </div>
 </template>
 

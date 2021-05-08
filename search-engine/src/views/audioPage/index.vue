@@ -1,6 +1,7 @@
 <template>
     <div>
         <template v-if="audioInfo">
+            <p class="resultsTips">为您搜索到{{totalCount}}条相关音频</p>
             <AudioList :audio-info="audioInfo"  @func="getMsgFromSon" ref="audioList" />
         </template>
         <div class="block">
@@ -13,6 +14,12 @@
                     :total="totalCount">
             </el-pagination>
         </div>
+        <template v-if="totalCount===0">
+            <p class="notFound">
+                抱歉没有找到与“<span>{{this.keyWord}}</span>”
+                相关的音频。
+            </p>
+        </template>
     </div>
 </template>
 

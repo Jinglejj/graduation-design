@@ -2,3 +2,21 @@
     width:100%;
     height:100%;
 }
+.resultsTips{
+    font-size: 13px;
+    margin-left: 5px;
+    color:#999;
+    font: 13px/21px Arial,sans-serif;
+}
+.notFound{
+    font-size: 18px;
+    color: #000;
+    margin-left: 5px;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+.notFound>span{
+    color: #c00;
+    font-size: 18px;
+}

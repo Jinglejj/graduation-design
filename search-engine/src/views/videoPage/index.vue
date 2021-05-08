@@ -1,6 +1,7 @@
 <template>
   <div>
     <template v-if="videoInfo">
+      <p class="resultsTips">为您搜索到{{totalCount}}条相关视频</p>
       <Video
         :videoInfo="video"
         :key="video.id"
@@ -39,6 +40,11 @@
       >
       </el-pagination>
     </div>
+    <template v-if="totalCount===0">
+      <p class="notFound">
+        抱歉没有找到与“<span>{{this.keyWord}}</span>”相关的视频。
+      </p>
+    </template>
   </div>
 </template>
 
@@ -70,7 +76,6 @@ export default {
       }
       this.videoInfo = data.map.data.results;
       this.totalCount = data.map.data.total;
-      this.totalCount = 5;
     },
     showDialog(text) {
       this.dialogVisible = true;
