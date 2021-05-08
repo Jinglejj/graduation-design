@@ -18,6 +18,7 @@
                     :visible.sync="dialogVisible"
                     @close="closeDialog"
                     width="41%"
+                    v-dialogDrag
             >
                 <video
                         width="740"

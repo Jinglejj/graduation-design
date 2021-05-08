@@ -9,6 +9,7 @@ import store from './store'
 Vue.prototype.axios=axios
 Vue.use(ElementUI)
 Vue.config.productionTip = false
+import   './utils/dialogDrag'
 
 new Vue({
   router,
