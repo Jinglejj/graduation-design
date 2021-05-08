@@ -36,10 +36,9 @@
     }
 
     .box {
-        width: 95%;
-        margin: 5px 0;
-        padding: 5px;
-        height: 140px;
+        width: 595px;
+        margin: 5px;
+        padding: 5px
     }
 
 
