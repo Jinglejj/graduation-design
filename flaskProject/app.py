@@ -18,8 +18,8 @@ class Result:
     def __init__(self):
         self.data = []
         self.total = 0
-        self.page_size=0
-        self.page_number=0
+        self.page_size = 0
+        self.page_number = 0
 
 
 def allowed_file(filename):
@@ -36,12 +36,12 @@ def hello_world():
 @cross_origin()
 def up_pic():
     file = request.files['file']
-    page_size = request.form.get('pageSize', default=1)
-    page_number = request.form.get('pageNumber', default=20)
+    page_size = int(request.form.get('pageSize', default=1));
+    page_number = int(request.form.get('pageNumber', default=20));
     base_path = os.path.dirname(__file__)  # 当前文件所在路径
     upload_path = os.path.join(base_path, "static/uploads", secure_filename(file.filename))
     file.save(upload_path)
-    images = search_images(upload_path,int(page_number),int(page_size))
+    images = search_images(upload_path, page_number, page_size);
     images = np.array([s.decode('UTF-8') for s in images])
     return jsonify(images.tolist())
 

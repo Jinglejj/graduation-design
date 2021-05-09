@@ -2,6 +2,7 @@ from models.extract_cnn_vgg16_keras import VGGNet
 import numpy as np
 import h5py
 
+
 # 欧氏距离
 def euclidean_distance(query, feats):
     scores = []
@@ -70,21 +71,21 @@ def min_distance(query, feats):
     return scores, rank_ID, rank_score
 
 
-def search_images(query_path):
+def search_images(query_path, page_number, page_size):
     # 提取要查询图片的特征向量
     index = './vgg_featureCNN.h5'
     h5f = h5py.File(index, 'r')
     feats = h5f['dataset_1'][:]
     imgNames = h5f['dataset_2'][:]
     h5f.close()
-
+    print(page_size * (page_number - 1), page_size);
+    start = page_size * (page_number - 1);
+    end = page_size;
     # 实例化VGGNet16 对象
     model = VGGNet()
     queryVec = model.vgg_extract_feat(query_path)  # 修改此处改变提取特征的网络
     scores, rank_ID, rank_score = cosine_distance(queryVec, feats)
-    maxres = 10  # 检索出10张相似度最高的图片
     imlist = []
-    for i, index in enumerate(rank_ID[0:maxres]):
+    for i, index in enumerate(rank_ID[start:end]):
         imlist.append(imgNames[index])
     return imlist
-
