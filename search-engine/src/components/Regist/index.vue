@@ -72,7 +72,9 @@
                         const {data} = await register(this.loginForm);
                         console.log(data)
                         if(data.code===200){//修改状态=》跳转admin
-                           this.$message.success("注册成功！三秒后跳转登陆")
+                           this.$message.success("注册成功，三秒后跳转登陆！")
+                        }else{
+                            this.$message.error("注册失败，请重试！")
                         }
                         setTimeout( ()=> {
                         this.$router.push('login')

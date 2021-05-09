@@ -27,7 +27,7 @@
                      @mouseenter="seeVolumeIcon"
                      @mouseleave="hideVolume"
                 >
-                    <div>
+                    <div  >
                         <i :class="volumeIcon"
                            v-show="showVolumeIcon"
                            class="bell"
@@ -40,18 +40,22 @@
                                                         @change="changeVolume()"
                                                 >
                                                 </el-slider>-->
-                        <el-button style="margin-left: 20px" @click="goLast()" circle icon="el-icon-arrow-left"
-                                   :disabled="this.disabledLastPlay">
-                        </el-button>
-                        <el-button style="" @click="goNext()" circle icon="el-icon-arrow-right"
-                                   :disabled="this.disabledNextPlay">
-                        </el-button>
+
+
+                            <el-button style="margin-left: 20px;margin-top: 5px;" size="small" @click="goLast()" circle icon="el-icon-arrow-left"
+                                       :disabled="this.disabledLastPlay">
+                            </el-button>
+                            <el-button style="" @click="goNext()" size="small"  circle icon="el-icon-arrow-right"
+                                       :disabled="this.disabledNextPlay">
+                            </el-button>
+
                     </div>
                 </div>
             </div>
         </div>
         <p class="sentence_text" v-html="this.audioInfo.sentence_text[this.playIndex-1]">
         </p>
+         <p class="resultsTips tips"  >{{audioInfo.start_time.length}}条结果</p>
     </el-card>
 </template>
 <script>
@@ -181,6 +185,11 @@
 </script>
 
 <style scoped>
+    .tips{
+        float: right;
+        line-height: 13px;
+        margin: 0px;
+    }
     .playButton {
         font-size: 45px;
         margin-right: 5px;
@@ -236,7 +245,7 @@
         float: left;
         margin-left: 10px;
         font-weight: bold;
-        margin-top: 7px;
+        margin-top: 8px;
     }
 
     .volume {
