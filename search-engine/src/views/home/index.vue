@@ -19,6 +19,16 @@
           <AudioPage slot="audio" :keyWord="keyWord" />
           <VideoPage slot="video" :keyWord="keyWord" />
         </Result>
+        <template v-else-if="showImage">
+          <div>
+            <ShowImage
+              v-for="url in imageList"
+              :key="url"
+              :imageUrl="url"
+              :imageList="imageList"
+            />
+          </div>
+        </template>
       </keep-alive>
     </div>
   </el-main>
@@ -66,13 +76,14 @@ export default {
     imageList: [],
     showTitle: true,
     showResult: false,
+    showImage: false,
   }),
   methods: {
     async search() {
-      this.showTitle = false;
       if (this.input !== "") {
         this.toggle(); //过渡动画
         this.keyWord = this.input;
+        this.showImage = false;
         setTimeout(() => {
           this.showResult = true;
         }, 400);
@@ -81,17 +92,21 @@ export default {
     async searchImage(file) {
       this.audioInfo = null;
       this.toggle();
-      console.log(file);
+      this.showImage = true;
+      this.showResult = false;
+      this.input='';
       const { data } = await searchImage(file.raw);
+      const imageList = data.map(
+        (e) => `${process.env.VUE_APP_IMAGE}/${e.split("\\").join("/")}`
+      );
       setTimeout(() => {
-        this.imageList = data.map(
-          (e) => `${process.env.VUE_APP_IMAGE}/${e.split("\\").join("/")}`
-        );
-        console.log(this.imageList);
+        this.imageList = imageList;
       }, 400);
     },
     toggle() {
       if (this.style.left === "50%") {
+        this.showTitle = false;
+        this.showTitle = false;
         this.style = {
           left: 0,
           transform: `translate(0, 0)`,

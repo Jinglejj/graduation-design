@@ -1,7 +1,7 @@
 import request from "./request";
 const IMAGE_API = process.env.VUE_APP_IMAGE_API;
 const SEARCH_API = process.env.VUE_APP_SEARCH_API_API;
-export const searchImage = ( file, pageNumber = 1, pageSize = 20 ) => {
+export const searchImage = ( file, pageNumber = 1, pageSize = 50 ) => {
   const formData =new FormData();
   formData.append("file",file);
   formData.append("pageSize",pageSize);
