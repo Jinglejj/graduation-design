@@ -85,7 +85,7 @@ export default {
       const { data } = await searchImage(file.raw);
       setTimeout(() => {
         this.imageList = data.map(
-          (e) => `${process.env.VUE_APP_IMAGE_API}/${e.split("\\").join("/")}`
+          (e) => `${process.env.VUE_APP_IMAGE}/${e.split("\\").join("/")}`
         );
         console.log(this.imageList);
       }, 400);
