@@ -3,6 +3,12 @@
     <div v-if="!showTitle" style="float:left;margin: 10px 15px 0px 0px;">
          <img src="img/logo.png" style="width: 130px;height: 24px" alt="logo">
     </div>
+    <div  class="search-container ">
+<div class="logo" else>
+      <Logo/>
+    </div>
+      <SearchInput :style="style" class="search-input" :input.sync="input" @search="search"  @uploadFile="searchImage"/>
+    </div>
     <div class="result-container">
       <keep-alive>
         <Result v-if="showResult">
