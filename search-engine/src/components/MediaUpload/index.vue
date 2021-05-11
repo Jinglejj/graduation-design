@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="upload_box">
         <h1>上传文件</h1>
         <el-upload
                 class="upload-demo"
@@ -77,7 +77,10 @@
 </script>
 
 <style scoped>
-    .el-upload__tip {
-
+    .upload_box{
+        width: 600px;
+        margin: 0 auto;
+        padding-top: 50px;
+        text-align: center;
     }
 </style>

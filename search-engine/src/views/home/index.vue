@@ -1,16 +1,7 @@
 <template>
   <el-main class="container">
-    <div class="search-container">
-      <div class="logo" v-if="showTitle">
-        <Logo />
-      </div>
-      <SearchInput
-        :style="style"
-        class="search-input"
-        :input.sync="input"
-        @search="search"
-        @uploadFile="searchImage"
-      />
+    <div v-if="!showTitle" style="float:left;margin: 10px 15px 0px 0px;">
+         <img src="img/logo.png" style="width: 130px;height: 24px" alt="logo">
     </div>
     <div class="result-container">
       <keep-alive>
@@ -31,6 +22,7 @@
         </template>
       </keep-alive>
     </div>
+
   </el-main>
 </template>
 
@@ -81,6 +73,7 @@ export default {
   methods: {
     async search() {
       if (this.input !== "") {
+        document.title=this.input+"_跨媒体搜索";
         this.toggle(); //过渡动画
         this.keyWord = this.input;
         this.showImage = false;
@@ -112,8 +105,16 @@ export default {
           transform: `translate(0, 0)`,
         };
       }
-    },
+    }
   },
+  computed:{
+    left(){
+      if(!this.showTitle){
+        return "left";
+      }
+      return "none"
+    }
+  }
 };
 </script>
 
@@ -125,7 +126,12 @@ export default {
   margin-top: 130px;
   font-weight: 600;
 }
+.left{
+  float: left;
+}
+.none{
 
+}
 .search-container {
   position: relative;
   height: 64px;
