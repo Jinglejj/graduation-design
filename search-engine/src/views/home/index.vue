@@ -3,7 +3,7 @@
     <div v-if="!showTitle" style="float:left;margin: 10px 15px 0px 0px;">
       <img src="img/logo.png" style="width: 130px;height: 24px" alt="logo">
     </div>
-    <div :class="this.left">
+    <div :class="this.left" style="width:91%">
       <div class="search-container">
         <div class="logo" v-if="showTitle">
           <Logo />
@@ -23,6 +23,16 @@
             <AudioPage slot="audio" :keyWord="keyWord" />
             <VideoPage slot="video" :keyWord="keyWord" />
           </Result>
+          <template v-else-if="showImage">
+            <div>
+              <ShowImage
+                      v-for="url in imageList"
+                      :key="url"
+                      :imageUrl="url"
+                      :imageList="imageList"
+              />
+            </div>
+          </template>
         </keep-alive>
       </div>
     </div>
@@ -72,14 +82,15 @@
       imageList: [],
       showTitle: true,
       showResult: false,
+      showImage: false,
     }),
     methods: {
       async search() {
-        this.showTitle = false;
         if (this.input !== "") {
           document.title=this.input+"_跨媒体搜索";
           this.toggle(); //过渡动画
           this.keyWord = this.input;
+          this.showImage = false;
           setTimeout(() => {
             this.showResult = true;
           }, 400);
@@ -88,17 +99,21 @@
       async searchImage(file) {
         this.audioInfo = null;
         this.toggle();
+        this.showImage = true;
+        this.showResult = false;
+        this.input='';
         // console.log(file);
         const { data } = await searchImage(file.raw);
         document.title="图片检索_跨媒体搜索";
+         const imageList = data.map(
+                (e) => `${process.env.VUE_APP_IMAGE}/${e.split("\\").join("/")}`
+        );
         setTimeout(() => {
-          this.imageList = data.map(
-                  (e) => `${process.env.VUE_APP_IMAGE}/${e.split("\\").join("/")}`
-          );
-          // console.log(this.imageList);
+          this.imageList = imageList;
         }, 400);
       },
       toggle() {
+        this.showTitle = false;
         if (this.style.left === "50%") {
           this.style = {
             left: 0,
