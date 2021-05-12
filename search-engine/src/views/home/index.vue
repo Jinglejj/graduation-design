@@ -3,7 +3,7 @@
     <div v-if="!showTitle" style="float:left;margin: 10px 15px 0px 0px;">
       <img src="img/logo.png" style="width: 130px;height: 24px" alt="logo">
     </div>
-    <div :class="this.left" style="width:91%">
+    <div :class="this.left">
       <div class="search-container">
         <div class="logo" v-if="showTitle">
           <Logo />
@@ -143,6 +143,7 @@
   }
   .left{
     float: left;
+    width: 91%;
   }
   .none{
 
