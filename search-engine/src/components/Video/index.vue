@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div style="margin-left: 10px">
-                <div class="title">
+                <div class="title"  @click="playVideo()">
                             {{videoInfo.file_name.replace(".wav","").replace(".mp4","")}}
                  </div>
                 <p class="sentence_text" v-html="videoInfo.sentence_text[playIndex-1]"></p>
