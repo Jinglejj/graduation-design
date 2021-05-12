@@ -1,7 +1,7 @@
 <template>
     <div>
         <template v-if="textInfo">
-            <p class="resultsTips">为您搜索到{{totalCount}}条相关新闻</p>
+            <p class="resultsTips">为您搜索到{{totalCount}}条相关内容</p>
             <TextInfo :key="text.id" v-for="text in textInfo" :text-info="text"/>
             <div class="block">
                 <el-pagination

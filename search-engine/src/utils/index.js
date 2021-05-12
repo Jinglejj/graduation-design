@@ -39,5 +39,5 @@ function formatTime(value) {
 }
 export{
     transTime,
-    formatTime
+    formatTime,
 }

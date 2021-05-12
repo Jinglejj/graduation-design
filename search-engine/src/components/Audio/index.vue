@@ -12,7 +12,7 @@
             ></audio>
             <div>
                 <div>
-                    <span>{{audioInfo.file_name.slice(6)}}</span>
+                    <span>{{audioInfo.file_name.slice(6).replace(".wav","")}}</span>
                 </div>
                 <i
                         :class="playIcon"
