@@ -1,7 +1,7 @@
 <template>
   <el-main class="container">
-    <div v-if="!showTitle" style="float:left;margin: 10px 15px 0px 0px;">
-      <img src="img/logo.png" style="width: 130px;height: 24px" alt="logo">
+    <div v-if="!showTitle" style="float:left;margin: 16px 16px 16px 0;">
+      <img src="img/logo.png" style="width: 130px;height: 24px"  alt="logo">
     </div>
     <div :class="this.left">
       <div class="search-container">

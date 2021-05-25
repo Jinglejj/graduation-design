@@ -1,10 +1,8 @@
 <template >
   <div>
-
   <el-input
     placeholder="请输入内容"
     type="text"
-    prefix-icon="el-icon-search"
     @keyup.enter.native="$emit('search')"
     :value="input"
     @input="(val) => $emit('update:input', val)"
