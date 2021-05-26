@@ -71,21 +71,21 @@ def min_distance(query, feats):
     return scores, rank_ID, rank_score
 
 
+# 实例化VGGNet16 对象
+model = VGGNet()
+index = './vgg_featureCNN.h5'
+h5f = h5py.File(index, 'r')
+feats = h5f['dataset_1'][:]
+imgNames = h5f['dataset_2'][:]
+h5f.close()
+
+
 def search_images(query_path, page_number, page_size):
-    # 提取要查询图片的特征向量
-    index = './vgg_featureCNN.h5'
-    h5f = h5py.File(index, 'r')
-    feats = h5f['dataset_1'][:]
-    imgNames = h5f['dataset_2'][:]
-    h5f.close()
-    print(page_size * (page_number - 1), page_size);
-    start = page_size * (page_number - 1);
-    end = page_size;
-    # 实例化VGGNet16 对象
-    model = VGGNet()
-    queryVec = model.vgg_extract_feat(query_path)  # 修改此处改变提取特征的网络
+    queryVec = model.vgg_extract_feat(query_path)
     scores, rank_ID, rank_score = cosine_distance(queryVec, feats)
     imlist = []
+    start = page_size * (page_number - 1);
+    end = page_size;
     for i, index in enumerate(rank_ID[start:end]):
         imlist.append(imgNames[index])
     return imlist
