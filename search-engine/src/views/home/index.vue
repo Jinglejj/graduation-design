@@ -1,5 +1,5 @@
 <template>
-  <el-main class="container">
+  <el-main id="particles-container" class="container">
     <div v-if="!showTitle" style="float:left;margin: 16px 16px 16px 0;">
       <img src="img/logo.png" style="width: 130px;height: 24px"  alt="logo">
     </div>
@@ -49,7 +49,7 @@
   import VideoPage from "@/views/videoPage";
   import Logo from "@/components/Logo";
   import Result from "./components/Result";
-  import {loading} from '@/utils/loading'
+  import {loading} from '@/utils/loading';
   export default {
     name: "Home",
     components: {
@@ -87,12 +87,12 @@
         }
       },
       async searchImage(file) {
+        const data= await loading(this,async ()=>searchImage(file.raw));
         this.audioInfo = null;
         this.toggle();
         this.showImage = true;
         this.showResult = false;
         this.input='';
-        const data= await loading(this,async ()=>searchImage(file.raw));
         document.title="图片检索_跨媒体搜索";
         const imageList = data.map(
                 (e) => `${process.env.VUE_APP_IMAGE}/${e.split("\\").join("/")}`
@@ -118,6 +118,8 @@
         }
         return "none"
       }
+    },
+    mounted(){
     }
   };
 </script>
