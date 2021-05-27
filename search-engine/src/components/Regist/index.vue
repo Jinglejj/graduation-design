@@ -64,20 +64,31 @@
         >
 
         </el-input>
-        <el-button  @click="sendVerifyCode"
-                    class="getVerify"
-                    :disabled="isSend">{{ tips }}
+        <el-button @click="toShowPullze"
+                   class="getVerify"
+                   :disabled="isSend">{{ tips }}
         </el-button>
       </el-form-item>
       <el-button type="primary" style="width:100%;"
                  @click.native.prevent="handleRegist">注册
       </el-button>
     </el-form>
+    <div style="position: fixed;
+    left: 64%;
+    top: 34%;">
+      <Verify @success="sendVerifyCode()"
+              ref="verify"
+              v-show="showPullze"
+              :type="4"
+               :show-button="false"
+              img-url="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2125555825,2497829174&fm=26&gp=0.jpg"
+              ></Verify>
+    </div>
   </div>
 </template>
 
 <script>
-
+import Verify from 'vue2-verify'
 import {register} from "@/apis/user";
 import {verifyEmail} from "../../apis/user";
 
@@ -90,6 +101,7 @@ export default {
         password: '',
         email: ''
       },
+      showPullze:false,//是否显示拼图
       tips: "获取验证码",
       verify: null,//验证码
       loginRules: {
@@ -116,10 +128,18 @@ export default {
         }
       })
     },
-    toGetVerify() {
-
+    toShowPullze(){
+      this.$refs.loginForm.validate(async valid => {
+        if (valid) {
+          this.showPullze=true
+        }
+      })
     },
     async sendVerifyCode() {
+      setTimeout(()=>{
+        this.showPullze=false
+        this.$refs.verify.refresh()
+      },500)
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
           const data = await verifyCode(this.loginForm.email)
@@ -145,7 +165,7 @@ export default {
       })
     },
     async checkVerify() {
-      if(this.verify!==null){
+      if (this.verify !== null) {
         const data = await verifyEmail(this.loginForm.email, this.verify)
         if (data.data.data) {//验证码验证成功
           //处理登陆请求 页面跳转 =》 上传页面
@@ -161,14 +181,14 @@ export default {
         } else {
           this.$message.error("验证码错误！")
         }
-      }else{
+      } else {
         this.$message.warning("请输入验证码！")
       }
     }
   }
   ,
   mounted() {
-  }
+  }, components: {Verify}
 }
 </script>
 
@@ -269,7 +289,8 @@ $light_gray: #eee;
 
 
 }
-.getVerify{
+
+.getVerify {
   position: absolute;
   width: 112px;
   color: white;

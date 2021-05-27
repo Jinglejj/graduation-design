@@ -8876,7 +8876,14 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha1-HuO8mhbsv1EYvjNLsV+cRvgvWCU=
 
-vue@^2.6.11:
+vue2-verify@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.nlark.com/vue2-verify/download/vue2-verify-1.1.5.tgz#d26e01c266b09e55de79274e95ff568892220b4c"
+  integrity sha1-0m4BwmawnlXeeSdOlf9WiJIiC0w=
+  dependencies:
+    vue "^2.5.2"
+
+vue@^2.5.2, vue@^2.6.11:
   version "2.6.12"
   resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha1-9evU+mvShpQD4pqJau1JBEVskSM=
