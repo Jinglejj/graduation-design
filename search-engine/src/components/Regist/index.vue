@@ -90,7 +90,7 @@
 <script>
 import Verify from 'vue2-verify'
 import {register} from "@/apis/user";
-import {verifyEmail} from "../../apis/user";
+import {verifyEmail,verifyCode} from "../../apis/user";
 
 export default {
   name: 'Regist',
