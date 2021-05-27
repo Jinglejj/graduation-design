@@ -1,37 +1,45 @@
 <template>
-  <div class="uploadfile">
-    <h1>上传文件</h1>
-    <el-upload
-        class="upload-demo"
-        drag
-        ref="upload"
-        :action="uploadUrl"
-        :before-upload="beforeAvatarUpload"
-        :http-request="handleUpload"
-    >
-      <i class="el-icon-upload"></i>
-      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-      <div class="el-upload__tip" slot="tip">只能上传wav/mp4文件</div>
-    </el-upload>
-    <!--遮罩层-->
-    <div class="loading" v-if="loading">
-      <h4 class="tips">{{ tips }}</h4>
-      <!--进度条-->
-      <el-progress type="line" :percentage="percentage" class="progress" :show-text="true"></el-progress>
-    </div>
-    <!--上传完成提示对话框-->
-    <el-dialog
-        title="提示"
-        :visible="dialogVisible"
-        width="30%"
-        :modal-append-to-body='false'
-    >
-      <span>文件上传成功</span>
-      <span slot="footer" class="dialog-footer">
+  <div>
+    <div class="upload_box">
+      <h1>上传文件</h1>
+      <el-upload
+          class="upload-demo"
+          drag
+          ref="upload"
+          :action="uploadUrl"
+          :before-upload="beforeAvatarUpload"
+          :http-request="handleUpload"
+      >
+        <i class="el-icon-upload"></i>
+        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        <div class="el-upload__tip" slot="tip">只能上传wav/mp4文件</div>
+      </el-upload>
+      <!--遮罩层-->
+      <div class="myLoading" v-if="loading">
+        <h4 class="tips">{{ tips }}</h4>
+        <!--进度条-->
+        <el-progress type="line"
+                     :percentage="percentage"
+                     :text-inside="true"
+                     :stroke-width="20"
+                     class="progress"
+                     :show-text="true"
+                     :color="customColors"></el-progress>
+      </div>
+      <!--上传完成提示对话框-->
+      <el-dialog
+          title="提示"
+          :visible="dialogVisible"
+          width="30%"
+          :modal-append-to-body='false'
+      >
+        <span>文件上传成功</span>
+        <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="ensure">确 定</el-button>
       </span>
-    </el-dialog>
+      </el-dialog>
 
+    </div>
   </div>
 </template>
 
@@ -44,7 +52,14 @@ export default {
       loading: false,
       percentage: 0,
       tips: '',
-      dialogVisible: false
+      dialogVisible: false,
+      customColors: [
+        {color: '#f56c6c', percentage: 20},
+        {color: '#e6a23c', percentage: 40},
+        {color: '#5cb87a', percentage: 60},
+        {color: '#1989fa', percentage: 80},
+        {color: '#6f7ad3', percentage: 100}
+      ]
     }
   },
   methods: {
@@ -69,7 +84,6 @@ export default {
       return (isWAV || isMp4) && isLt500M;
     },
     handleUpload(param) {
-      console.log("----------")
       this.loading = true;
       this.tips = '正在上传中。。。';
 
@@ -99,7 +113,6 @@ export default {
             if (data.code === 200) {
 
             } else {
-              //发送邮件
             }
           }
       )
@@ -120,22 +133,14 @@ export default {
 .upload_box {
   width: 600px;
   margin: 0 auto;
-  padding-top: 50px;
+  padding-top: 200px;
   text-align: center;
 }
 
-.uploadfile {
-  width: 200px;
-  height: 200px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -100px;
-  margin-top: -100px;
-}
 
-.loading {
-  position: absolute;
+.myLoading {
+  position: fixed;
+  width: 100vw;
   left: 0;
   top: 0;
   right: 0;
@@ -145,8 +150,7 @@ export default {
 }
 
 .progress {
-  width: 200px;
-  height: 200px;
+  width: 400px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -159,6 +163,7 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
+  font-size: 20px;
   margin-left: -100px;
   margin-top: -150px;
 }
