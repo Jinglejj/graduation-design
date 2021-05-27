@@ -153,7 +153,7 @@ export default {
   width: 400px;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 45%;
   margin-left: -100px;
   margin-top: -100px;
 }
@@ -162,7 +162,7 @@ export default {
   color: #409eff;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 51%;
   font-size: 20px;
   margin-left: -100px;
   margin-top: -150px;
