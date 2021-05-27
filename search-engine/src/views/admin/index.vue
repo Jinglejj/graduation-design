@@ -15,7 +15,7 @@
         methods: {},
         components: {MediaUpload},
         mounted() {
-
+          document.title="管理界面——文件上传";
         }
     }
 </script>
