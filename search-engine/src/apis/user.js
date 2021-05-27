@@ -19,3 +19,15 @@ export function register(data) {
     data
   })
 }
+export function verifyCode(data) {
+  return request({
+    url: `${USER_API}/code?email=${data}`,
+    method: 'get',
+  })
+}
+export function verifyEmail(email,code) {
+   return request({
+    url: `${USER_API}/verifyEmail?email=${email}&code=${code}`,
+    method: 'get'
+  })
+}
