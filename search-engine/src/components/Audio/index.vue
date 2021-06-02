@@ -7,12 +7,12 @@
         <div class="control">
             <audio ref='audio'
                    preload="none"
-                   :src="audioInfo.file_name"
+                   :src="playUrl"
                    @timeupdate="onPlay()"
             ></audio>
             <div>
                 <div>
-                    <span>{{audioInfo.file_name.slice(6).replace(".wav","")}}</span>
+                    <p v-html="audioInfo.file_name.slice(6).replace('.wav','')"></p>
                 </div>
                 <i
                         :class="playIcon"
@@ -73,6 +73,7 @@
                 showVolumeIcon: true,//音效图标
                 playIndex: 1,//默认播放第1个
                 playTime:0,//当前的播放时间
+                playUrl:null
             }
         },
         methods: {
@@ -157,6 +158,7 @@
             //直接第一个
             this.$refs.audio.currentTime = this.audioInfo.start_time[0]
             this.playTime=this.audioInfo.start_time[0]
+             this.playUrl=this.audioInfo.file_name.replace(/<(style|script|iframe)[^>]*?>[\s\S]+?<\/\1\s*>/gi,'').replace(/<[^>]+?>/g,'').replace(/\s+/g,' ').replace(/ /g,' ').replace(/>/g,' ');
          },
         computed: {
             percentage: {//进度条改变才生效

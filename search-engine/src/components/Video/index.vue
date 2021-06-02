@@ -4,7 +4,7 @@
         <el-card class="box" shadow="hover">
             <div class="videoBox"   @click="playVideo()">
                 <div>
-                     <video :src="'http://106.53.148.120:8989/download?fileName='+videoInfo.file_name"
+                     <video :src="'http://106.53.148.120:8989/download?fileName='+playUrl"
                        width="174" height="115"></video>
                 </div>
                 <div class="duration">
@@ -14,7 +14,7 @@
             </div>
             <div style="margin-left: 10px">
                 <div class="title"  @click="playVideo()">
-                            {{videoInfo.file_name.replace(".wav","").replace(".mp4","")}}
+                            <p v-html="videoInfo.file_name.replace('.wav','') .replace('.mp4','')"></p>
                  </div>
                 <p class="sentence_text" v-html="videoInfo.sentence_text[playIndex-1]"></p>
                 <p class="resultsTips tips">{{videoInfo.start_time.length}}条结果</p>
@@ -22,7 +22,7 @@
         </el-card>
         <template v-if="playFile">
             <el-dialog
-                    :title="playFile.file_name.replace('.wav','').replace('.mp4','')"
+                    :title="playUrl.replace('.wav','').replace('.mp4','')"
                     top="20vh"
                     :visible.sync="dialogVisible"
                     @close="closeDialog"
@@ -34,7 +34,7 @@
                         height="430"
                         ref="videoPlayer"
                         id="videoPlayer"
-                        :src="'http://106.53.148.120:8989/download?fileName='+playFile.file_name"
+                        :src="'http://106.53.148.120:8989/download?fileName='+playUrl"
                         controls
                 ></video>
                 <div class="subtitle">
@@ -65,7 +65,8 @@
                 playFile: null,
                 dialogVisible: false,
                 playIndex: 1,
-                playTime: 0
+                playTime: 0,
+                playUrl:null
             }
         },
         methods: {
@@ -110,7 +111,9 @@
             /*
                         * 调用方法
                         */
-            this.getVideoBase64('http://106.53.148.120:8989/download?fileName='+this.videoInfo.file_name
+            this.playUrl=this.videoInfo.file_name.replace(/<(style|script|iframe)[^>]*?>[\s\S]+?<\/\1\s*>/gi,'').replace(/<[^>]+?>/g,'').replace(/\s+/g,' ').replace(/ /g,' ').replace(/>/g,' ');
+            this.getVideoBase64('http://106.53.148.120:8989/download?fileName='+this.playUrl
+
             ).then(res => {
                 console.log(res);
             })
