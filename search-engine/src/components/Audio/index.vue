@@ -11,7 +11,7 @@
                    @timeupdate="onPlay()"
             ></audio>
             <div>
-                <div>
+                <div  >
                     <p v-html="audioInfo.file_name.slice(6).replace('.wav','')"></p>
                 </div>
                 <i
@@ -273,6 +273,7 @@
     .sentence_text {
         text-align: left;
         text-indent: 2em;
+       padding-top: 20px;
     }
 
     .title {
